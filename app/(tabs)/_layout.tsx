@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { Tabs, useRouter } from 'expo-router';
-import { Menu as MenuIcon, Home, Search, Calendar, User, Leaf, Home as DaycareIcon, AlertTriangle } from 'lucide-react-native';
+import { Menu as MenuIcon, Home, Search, Bot, Calendar, User, Leaf, Home as DaycareIcon, AlertTriangle, Gift, Star } from 'lucide-react-native';
 
 interface MenuProps {
   onItemSelected: (route: string) => void;
@@ -74,7 +74,7 @@ export default function TabsLayout() {
             name="explore"
             options={{
               title: 'Explore',
-              tabBarIcon: ({ color }) => <Search size={24} color={color} />,
+              tabBarIcon: ({ color }) => <Bot size={24} color={color} />,
             }}
           />
           <Tabs.Screen
@@ -99,17 +99,31 @@ export default function TabsLayout() {
             }}
           />
           <Tabs.Screen
-            name="profile"
-            options={{
-              title: 'Profile',
-              tabBarIcon: ({ color }) => <User size={24} color={color} />,
-            }}
-          />
-          <Tabs.Screen
             name="behavioral"
             options={{
               title: 'Behavioral',
               tabBarIcon: ({ color }) => <AlertTriangle size={24} color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="milestones"
+            options={{
+              title: 'Milestones',
+              tabBarIcon: ({ color }) => <Star size={24} color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="marketplace"
+            options={{
+              title: 'Marketplace',
+              tabBarIcon: ({ color }) => <Gift size={24} color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: 'Profile',
+              tabBarIcon: ({ color }) => <User size={24} color={color} />,
             }}
           />
         </Tabs>
@@ -121,7 +135,6 @@ export default function TabsLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
   },
   menu: {
     flex: 1,

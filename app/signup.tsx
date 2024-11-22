@@ -14,7 +14,7 @@ export default function Signup() {
   const handleSignup = () => {
     // Here you would typically handle the signup process
     // For now, we'll just navigate to the first questionnaire page
-    router.push('/questionnaire' as any);
+    router.push('/questionnaire/name' as any);
   };
 
   return (

@@ -1,115 +1,190 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, ImageBackground, SafeAreaView, TextInput } from 'react-native';
-import { Settings, MessageCircle } from 'lucide-react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  ImageBackground,
+  SafeAreaView,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import { Link } from 'expo-router';
 
 export default function HomeScreen() {
-  const articles = [
+  const sections = [
     {
-      title: "How to help your child sleep through the night",
-      type: "AI guide",
-      duration: "3 min read",
-      image: "https://cdn.usegalileo.ai/sdxl10/71a2c1b0-9b2d-4c8c-89c6-87c43a8aff50.png"
+      title: 'Daycare Services',
+      description: 'Explore trusted daycare options tailored to your needs.',
+      image: 'https://cdn.usegalileo.ai/sdxl10/841a0466-38fb-4d87-b074-7de27df69130.png',
+      link: '/daycare',
     },
     {
-      title: "Get ready for daycare",
-      type: "AI guide",
-      duration: "5 min read",
-      image: "https://cdn.usegalileo.ai/stability/2058a638-3565-40f3-b254-e4e147ef6742.png"
+      title: 'Child Behavior',
+      description: 'Discover tips and tools to nurture positive behavior in your child.',
+      image: 'https://cdn.usegalileo.ai/sdxl10/e9f8c712-9beb-45e4-859a-db3221926481.png',
+      link: '/behavioral',
     },
     {
-      title: "Find the perfect daycare",
-      type: "AI guide",
-      duration: "3 min read",
-      image: "https://cdn.usegalileo.ai/stability/b2128d10-7cf4-44d4-a4ba-691b67e42306.png"
+      title: 'Child Milestones',
+      description: 'Track and celebrate your child growth and developmental achievements.',
+      image: 'https://cdn.usegalileo.ai/sdxl10/1abeffb9-5a85-4dfa-9915-98350032fc67.png',
+      link: '/milestones',
     },
     {
-      title: "Track your child's development",
-      type: "AI guide",
-      duration: "2 min read",
-      image: "https://cdn.usegalileo.ai/sdxl10/596e489c-c041-4171-9c13-91dd3f44c848.png"
+      title: 'Marketplace',
+      description: 'Shop products and services curated for parenting and childcare.',
+      image: 'https://cdn.usegalileo.ai/sdxl10/d3d11315-55f1-4f1c-97b1-e1e29f9f11e6.png',
+      link: '/marketplace',
     },
-    {
-      title: "What's the best age for starting potty training?",
-      type: "Parenting community",
-      duration: "6 replies",
-      image: "https://cdn.usegalileo.ai/stability/6a2b08d3-df84-4510-bb13-d6423d6aff50.png"
-    }
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFAF0' }}>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ padding: 16, paddingTop: 8 }}>
-          {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-            <TouchableOpacity>
-              <Settings size={24} color="#111517" />
-            </TouchableOpacity>
-          </View> */}
-          <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#111517', marginTop: 16, marginBottom: 8 }}>
-            Hi, welcome back
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <ImageBackground
+          source={{ uri: 'https://cdn.usegalileo.ai/sdxl10/63d6ef14-4981-47e3-9b66-b836f7bc26e6.png' }}
+          style={styles.headerImage}
+          imageStyle={styles.headerImageStyle}
+        >
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>Parenting</Text>
+          </View>
+        </ImageBackground>
+
+        <View style={styles.welcomeContainer}>
+          <Text style={styles.welcomeTitle}>Welcome Back!</Text>
+          <Text style={styles.welcomeSubtitle}>
+            Discover resources and tools to support your parenting journey.
           </Text>
         </View>
 
-        {articles.map((article, index) => (
-          <View key={index} style={{ padding: 16 }}>
-            <ImageBackground
-              source={{ uri: article.image }}
-              style={{ height: 200, borderRadius: 12, overflow: 'hidden' }}
-              imageStyle={{ borderRadius: 12 }}
-            >
-              <View style={{ 
-                flex: 1, 
-                justifyContent: 'flex-end', 
-                padding: 16,
-                backgroundColor: 'rgba(0,0,0,0.4)'
-              }}>
-                <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
-                  {article.title}
-                </Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-                  <Text style={{ color: 'white' }}>
-                    {article.type} · {article.duration}
-                  </Text>
-                  <TouchableOpacity 
-                    style={{ 
-                      backgroundColor: '#FF6347', 
-                      paddingHorizontal: 16, 
-                      paddingVertical: 8, 
-                      borderRadius: 8 
-                    }}
-                  >
-                    <Text style={{ color: '#111517', fontWeight: '500' }}>Read now</Text>
-                  </TouchableOpacity>
+        {sections.map((section, index) => (
+          <Link key={index} href={section.link as any} asChild>
+            <TouchableOpacity style={styles.sectionContainer}>
+              <ImageBackground
+                source={{ uri: section.image }}
+                style={styles.sectionImage}
+                imageStyle={styles.sectionImageStyle}
+              >
+                <View style={styles.sectionContent}>
+                  <Text style={styles.sectionTitle}>{section.title}</Text>
+                  <Text style={styles.sectionDescription}>{section.description}</Text>
+                  <View style={styles.learnMoreButton}>
+                    <Text style={styles.learnMoreText}>Learn More</Text>
+                  </View>
                 </View>
-              </View>
-            </ImageBackground>
-          </View>
+              </ImageBackground>
+            </TouchableOpacity>
+          </Link>
         ))}
       </ScrollView>
 
-      <View style={{ 
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        backgroundColor: '#111517', 
-        padding: 16, 
-        borderTopWidth: 1, 
-        borderTopColor: '#2d3436' 
-      }}>
+      <View style={styles.inputContainer}>
         <TextInput
           placeholder="Ask me anything"
           placeholderTextColor="#647987"
-          style={{ 
-            flex: 1, 
-            color: 'white', 
-            fontSize: 16, 
-            marginRight: 8 
-          }}
+          style={styles.input}
         />
         <TouchableOpacity>
-          <MessageCircle size={24} color="#647987" />
+          <Text style={styles.askButton}>Ask</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F8F9FB',
+  },
+  scrollView: {
+    flex: 1,
+  },
+  headerImage: {
+    height: 320,
+    justifyContent: 'flex-end',
+  },
+  headerImageStyle: {
+    borderRadius: 0,
+  },
+  headerTextContainer: {
+    padding: 16,
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 28,
+    fontWeight: 'bold',
+    lineHeight: 34,
+  },
+  welcomeContainer: {
+    padding: 16,
+  },
+  welcomeTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#141C24',
+    marginBottom: 8,
+  },
+  welcomeSubtitle: {
+    fontSize: 16,
+    color: '#3F5374',
+  },
+  sectionContainer: {
+    padding: 16,
+  },
+  sectionImage: {
+    height: 200,
+    justifyContent: 'flex-end',
+  },
+  sectionImageStyle: {
+    borderRadius: 8,
+  },
+  sectionContent: {
+    padding: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 8,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#141C24',
+    marginBottom: 4,
+  },
+  sectionDescription: {
+    fontSize: 14,
+    color: '#3F5374',
+    marginBottom: 8,
+  },
+  learnMoreButton: {
+    backgroundColor: '#FF6347',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 4,
+    alignSelf: 'flex-start',
+  },
+  learnMoreText: {
+    color: 'white',
+    fontWeight: '500',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#111517',
+    padding: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#2d3436',
+  },
+  input: {
+    flex: 1,
+    color: 'white',
+    fontSize: 16,
+    marginRight: 8,
+  },
+  askButton: {
+    color: '#647987',
+    fontSize: 18,
+  },
+});
+
